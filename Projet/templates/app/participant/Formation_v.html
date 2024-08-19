@@ -1,0 +1,59 @@
+{% extends 'main_app_parti.html' %}
+{% load static %}
+{% block main_app %}
+<div class="container d-flex justify-content-center align-items-center mt-4">
+    <div class="col-md-12">
+        <h5 class="mt-2">Habitat</h5>
+        <hr>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col" colspan="2" class="text-center">Plus des informations</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                    <th scope="row">Titre</th>
+                    <td>{{ item.titre }}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Images</th>
+                    <td>
+                        <img width="320" height="240" src="{{ item.images.url }}">
+                        <img width="320" height="240" src="{{ item.image_on.url }}">
+                        <img width="320" height="240" src="{{ item.image_to.url }}">
+                       
+                    </td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Prix</th>
+                    <td>{{ item.prix }}  $</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Description</th>
+                    <td>{{ item.description }}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Adresse</th>
+                    <td>Avenue  : {{ item.avenue }}  N° {{ item.numero }}  <br>Quartier :  {{ item.quartier }}  <br>Commune :  {{ item.commune }}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Disponibilité</th>
+                    <td>{{ item.disponibilite }}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">localisation</th>
+                    <td>{{ item.localisation }}</td>
+                    </tr>
+                    
+                </tbody>
+                
+            </table>
+            <br>
+            <button type="submit" class="btn btn-primary w-100 mt-2">Prendre Rendez-vous</button>
+        </div>
+    </div>
+</div>
+{% endblock main_app %}

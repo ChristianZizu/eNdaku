@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block main %}
+<nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="{% url "connect" %}">e-NDAKU</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-center">
+          <li class="nav-item li"></li>
+        </ul>
+        <div class="navbar-nav">
+          <div class="nav-item sing-out">
+              <a class="nav-link active px-3 text-white" href="{% url "register" %}">S'inscrire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <div class="row mt-4 log">
+        <div class="col-12 col-md-5 w-50 mx-auto justify-content-center">
+            <div class="container">
+                <div align=center>
+                    <img src="{% static 'image/Home-own.png'%}" class="img-fluid mx-auto user">
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="mt-4 alert {{message.tags}} text-center message-container">{{message}}</div>
+                    {% endfor %}
+                {% endif %}
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %} 
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse email</label>
+                        <input type="email" class="form-control" name="email" placeholder="exemple@gmail.com" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" name="password"  placeholder="mot de passe" required>
+                    </div>
+                    <div class="mb-1">
+                        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+    

@@ -1,0 +1,38 @@
+{% extends 'main_app_formateur.html' %}
+{% load static %}
+{% block main_app %}
+    <div class="container d-flex justify-content-center align-items-center mt-4">
+        <div class="col-md-12">
+            <h5 class="mt-2">Modifier Catégories</h5>
+            <hr>
+            <div class="text-center">
+                <img alt="Profil" src="{% static 'image/avatar.PNG' %}" class="img-thumbnail img-circle me-2" id="thumbnail">
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="mt-4 alert {{message.tags}} text-center message-container">{{message}}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Titre</label>
+                            <input type="text" class="form-control" id="title" pattern="[a-zA-Z ]*" name="title" value="{{item.title}}" required>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Image de la formation</label>
+                            <input type="file" class="form-control" id="fileImage" name="image" accept=".jpg, .png, .svg, .gif, .apng, .avif, .jpeg, .webp" value="{{item.image}}" required>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <button type="submit" class="btn btn-primary w-100">Créer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock main_app %}

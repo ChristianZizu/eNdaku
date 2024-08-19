@@ -1,0 +1,44 @@
+{% extends 'main_app_formateur.html' %}
+{% load static %}
+{% block main_app %}
+<div class="tab-content mt-2">
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col" colspan="2" class="text-center">Plus des informations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">Titre</th>
+                    <td>{{ item.title }}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Video</th>
+                    <td>
+                        <video width="320" height="240" controls>
+                            <source src="{{ item.video_file.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Montant</th>
+                    <td>{{ item.amount }}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Description</th>
+                    <td>{{ item.description }}</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Date</th>
+                    <td>{{ item.date_create }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock main_app %}

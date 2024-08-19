@@ -1,0 +1,192 @@
+{% extends 'main_app_formateur.html' %}
+{% load static %}
+{% block main_app %}
+    <div class="container d-flex justify-content-center align-items-center mt-4">
+        <div class="col-md-12">
+            <h5 class="mt-2">Enregistrer un Habitat</h5>
+            <hr>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mt-4 alert {{message.tags}} text-center message-container">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            <form action="{% url 'enregistrer_habitat' %}" method="post" id="form-login" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="title" class="form-label">Titre</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="avenue" class="form-label">Avenue</label>
+                            <input type="text" class="form-control" id="avenue" name="avenue" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="quartier" class="form-label">Quartier</label>
+                            <input type="text" class="form-control" id="quartier" name="quartier" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                         <div class="mb-2">
+                            <label for="commune" class="form-label">Commune</label>
+                            <input type="text" class="form-control" id="commune" name="commune" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="numero" class="form-label">Numéro</label>
+                            <input type="text" class="form-control" id="numero" name="numero" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="prix" class="form-label">Prix</label>
+                            <input type="text" class="form-control" id="prix" name="prix" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="disponibilite" class="form-label">Disponibilité</label>
+                            <input type="text" class="form-control" id="disponibilite" name="disponibilite" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-2">Enregistrer</button>
+            </form>
+            <h5 class="mt-2">Liste des Logements</h5>
+            <hr>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr class="th">
+                                <td class="title">Proprietaire</td>
+                                <td class="title">Titre</td>
+                                <td class="title">Avenue</td>
+                                <td class="title">Quartier</td>
+                                <td class="title">Commune</td>
+                                <td class="title">Numero</td>
+                                <td class="title">Description</td>
+                                <td class="title">Prix</td>:
+                                <td class="title">Disponibilité</td>
+                                <td class="title">Images</td>
+                                <td class="title" colspan="2">ACtions</td>
+                            </tr>
+                            {% for item in habitats %}
+                            <tr>
+                                <td>{{item.idProprietaire | capfirst}}</td>
+                                <td>{{item.titre | capfirst}}</td>
+                                <td>{{item.avenue | capfirst}}</td>
+                                <td>{{item.quartier | capfirst}}</td>
+                                <td>{{item.commune | capfirst}}</td>
+                                <td>{{item.numero | capfirst}}</td>
+                                <td>{{item.prix | capfirst}}</td>
+                                <td>{{item.description | capfirst}}</td>
+                                <td>{{item.disponibilite | capfirst}}</td>
+                                
+                                <td>
+                                    <a href="" role="button"><i class="bi bi-eye-fill"></i></a>
+                                </td>
+                                <td>
+                                    <a href="" role="button"><i class="bi bi-trash3-fill"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <br> <br>
+
+            <h5>Tableaux de Bord</h5>
+            <div class="row mt-4">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-header">Nombre d'Habitats</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ habitats.count }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% for rendez_vous in rendez_vous %}
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-header">Nombre de contacts</div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ rendez_vous.count }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+
+<br> <br>
+
+            <h5>Représentation GRaphique</h5>
+            <div class="row mt-4">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <h5 class="text-center">Répartition des Habitats</h5>
+                    <canvas id="habitatsPieChart"></canvas>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <h5 class="text-center">Répartition des Avis</h5>
+                    <canvas id="avisPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inclure Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Script pour les graphiques -->
+     <script>
+        // Graphique circulaire pour les habitats
+        const ctxHabitats = document.getElementById('habitatsPieChart').getContext('2d');
+        const habitatsPieChart = new Chart(ctxHabitats, {
+            type: 'pie',
+            data: {
+                labels: ['Habitats Disponibles', 'Habitats Occupés'],
+                datasets: [{
+                    label: 'Nombre d\'Habitats',
+                    data: [{{ habitats_disponibles }}, {{ habitats_occupes }}],
+                    backgroundColor: ['#4e73df', '#1cc88a'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673'],
+                    borderColor: '#ffffff',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+    </script>
+{% endblock main_app %}
+    

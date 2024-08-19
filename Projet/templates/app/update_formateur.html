@@ -1,0 +1,75 @@
+{% extends 'main_app.html' %}
+{% load static %}
+{% block main_app %}
+<div class="tab-content mt-2">
+    <div class="container d-flex justify-content-center align-items-center mt-4">
+        <div class="col-md-12">
+            <h5 class="mt-2">Modifier un formateur</h5>
+            <hr>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mt-4 alert {{message.tags}} text-center message-container">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row mt-2">
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="username" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{item.userId.username}}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="first_name" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" value="{{item.userId.first_name}}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="last_name" class="form-label">Post-Nom</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" value="{{item.userId.last_name}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Téléphone</label>
+                            <input type="tel" class="form-control" id="phone" name="number_phone" pattern="^\+243[0-9]{9}$" minlength="13" maxlength="13" placeholder="+243XXXXXXXXX" value="{{item.userId.number_phone}}" reqruired>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="email" class="form-label">email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="exemple@gmail.com" value="{{item.userId.email}}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="date" class="form-label">Date de naissance</label>
+                            <input type="date" class="form-control" id="date" name="date_birth" value="{{item.userId.date_birth}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Genre</label>
+                            <input type="text" class="form-control" id="sex" name="sex" value="{{item.userId.sex}}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="mb-2">
+                            <label for="speciality" class="form-label">Spécialité</label>
+                            <input type="text" class="form-control" name="speciality" id="speciality" value="{{item.speciality}}" required>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary w-100 mt-2" type="submit">Modifier</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main_app %}

@@ -1,0 +1,39 @@
+{% extends 'main_app_parti.html'%}
+{% load static %}
+{% block main_app %}
+
+        <h5 class="mt-2">Prendre Rendez-vous</h5>
+        <hr>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mt-4 alert {{message.tags}} text-center message-container">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'enregistrer_rendez_vous' %}" method="post" id="form-rendez-vous">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="mb-2">
+                        <label for="habitat_concerné" class="form-label">Habitat Concerné</label>
+                        <input type="text" class="form-control" id="habitat_concerné" name="habitat_concerné" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="mb-2">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="mb-2">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-2">Prendre Rendez-vous</button>
+        </form>
+
+{% endblock main_app %}

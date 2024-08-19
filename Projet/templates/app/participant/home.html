@@ -1,0 +1,30 @@
+{% extends 'main_app_parti.html' %}
+{% load static %}
+{% block main_app %}
+<div class="container d-flex justify-content-center align-items-center mt-4">
+    <div class="col-md-12">
+        <h5 class="mt-2">Type des formation <p class="float-end">Nombre: {{categories.count}} </p></h5>
+        <hr>
+        <div class="row mt-4">
+            {% for item in categories %}
+            {% if forloop.counter0|divisibleby:4 and not forloop.first %}
+            </div><div class="row">
+            {% endif %}
+            <div class="col-3 col-md-3 col-lg-3 col-sm-3">
+                <div class="card" style="width: 15rem; height: 100%;">
+                    <div class="date">
+                        <span><i class="bi bi-heart-fill"></i></span>
+                    </div>
+                    <a href="{% url "formationView" item.id %}">
+                        <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title text-center"><a href=""{% url "formationView" item.id %}"" class="text-decoration-none text-dark">{{item.title}}</a></h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main_app %}

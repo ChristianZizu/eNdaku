@@ -1,0 +1,4 @@
+Librairies :
+- django 
+- pillow 
+- send_mail

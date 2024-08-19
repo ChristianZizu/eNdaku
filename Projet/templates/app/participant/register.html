@@ -1,0 +1,78 @@
+{% extends 'main_app_participant.html' %}
+{% load static %}
+{% block main_app %}
+<div class="container d-flex justify-content-center align-items-center mt-4">
+    <div class="col-md-12">
+        <h5 class="mt-2">S'incrire</h5>
+        <hr>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mt-4 alert {{message.tags}} text-center message-container">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+        <form action="" method="post" id="form-login">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4">
+                    <div class="mb-2">
+                        <label for="username" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" pattern="[a-zA-Z ]*" id="username" name="username" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4">
+                    <div class="mb-2">
+                        <label for="first_name" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="first_name" pattern="[a-zA-Z ]*" name="first_name" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4">
+                    <div class="mb-2">
+                        <label for="last_name" class="form-label">Post-nom</label>
+                        <input type="text" class="form-control" id="last_name" pattern="[a-zA-Z ]*" name="last_name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-4">
+                    <div class="mb-2">
+                        <label for="numero_telephone" class="form-label">Téléphone</label>
+                        <input type="tel" class="form-control" id="numero_telephone" name="number_phone" pattern="^\+243[0-9]{9}$" minlength="13" maxlength="13" placeholder="+243XXXXXXXXX" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4">
+                    <div class="mb-2">
+                        <label for="email" class="form-label">Adresse email</label>
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 col-lg-4">
+                    <div class="mb-2">
+                        <label for="date" class="form-label">Date de naissance</label>
+                        <input type="date" class="form-control" name="date_birth" id="date_birth" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="mb-2">
+                        <label for="sex" class="form-label">Genre</label>
+                        <select name="sex" id="sexe" class="form-control" required>
+                            <option value="">Sélectionner Genre</option>
+                            <option value="masculin">Masculin</option>
+                            <option value="feminin">Feminin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="mb-2">
+                        <label for="speciality" class="form-label">Adresse</label>
+                        <input type="text" class="form-control" name="address" id="address" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-2">S'increre</button>
+        </form>
+        <a href="{% url "connect" %} " class='text-decoration-none float-end mt-4'> Connexion </a>
+    </div>
+</div>
+{% endblock main_app %}

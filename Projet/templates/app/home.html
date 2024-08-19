@@ -1,0 +1,133 @@
+{% extends 'main_app.html' %}
+{% load static %}
+{% block main_app %}
+    <div class="container d-flex justify-content-center align-items-center mt-4">
+        <div class="col-md-12">
+            <h5 class="mt-2">Enregistre un formateur</h5>
+            <hr>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mt-4 alert {{message.tags}} text-center message-container">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+            <form action="" method="post" id="form-login">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="username" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" pattern="[a-zA-Z ]*" id="username" name="username" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="first_name" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="first_name" pattern="[a-zA-Z ]*" name="first_name" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="last_name" class="form-label">Post-nom</label>
+                            <input type="text" class="form-control" id="last_name" pattern="[a-zA-Z ]*" name="last_name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="numero_telephone" class="form-label">Téléphone</label>
+                            <input type="tel" class="form-control" id="numero_telephone" name="number_phone" pattern="^\+243[0-9]{9}$" minlength="13" maxlength="13" placeholder="+243XXXXXXXXX" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="email" class="form-label">Adresse email</label>
+                            <input type="email" class="form-control" name="email" id="email" required>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="date" class="form-label">Date de naissance</label>
+                            <input type="date" class="form-control" name="date_birth" id="date_birth" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="sex" class="form-label">Genre</label>
+                            <select name="sex" id="sexe" class="form-control" required>
+                                <option value="">Sélectionner Genre</option>
+                                <option value="masculin">Masculin</option>
+                                <option value="feminin">Feminin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <div class="mb-2">
+                                <label for="categorie" class="form-label">Type de formation</label>
+                                <select name="categorie" class="form-select" required>
+                                    <option value="">Sélectionner</option>
+                                    {% for item in categories %}
+                                        <option value="{{ item.id }}">{{ item.title|capfirst }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-4">
+                        <div class="mb-2">
+                            <label for="speciality" class="form-label">Spécialité</label>
+                            <input type="text" class="form-control" name="speciality" id="speciality" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-2">Enregistre</button>
+            </form>
+
+            <h5 class="mt-2">Liste des formateurs</h5>
+            <hr>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr class="th">
+                                <td class="title">Prénom</td>
+                                <td class="title">Nom</td>
+                                <td class="title">Post-nom</td>
+                                <td class="title">Téléphone</td>
+                                <td class="title">Adresse mail</td>
+                                <td class="title">Type de formation</td>
+                                <td class="title">Spécialité</td>
+                                <td class="title">Genre</td>
+                                <td class="title" colspan="2">Traitement</td>
+                            </tr>
+                            {% for item in formateurs %}
+                            <tr>
+                                <td>{{item.userId.username | capfirst}}</td>
+                                <td>{{item.userId.first_name | capfirst}}</td>
+                                <td>{{item.userId.last_name | capfirst}}</td>
+                                <td>{{item.userId.number_phone | capfirst}}</td>
+                                <td>{{item.userId.email }}</td>
+                                <td>{{item.categorie }}</td>
+                                <td>{{item.speciality| capfirst}}</td>
+                                <td>{{item.userId.sex | capfirst}}</td>
+                                <td>
+                                    <a class="" href="{% url "updateFormateurAdmin" item.userId.id %}" role="button"><i class="bi bi-pencil-square"></i></a>
+                                </td>
+                                <td>
+                                    <a class="" href="{% url "deleteFormateurAdmin" item.userId.id %}" role="button"><i class="bi bi-trash3-fill"></i></a>
+                                </td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+{% endblock main_app %}
+    

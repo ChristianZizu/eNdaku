@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix du Profil</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Choisissez votre profil</h1>
+        <div class="profile-selection">
+            <a href="{% url 'connect' %}" class="profile-option">
+                <img src="{% static 'image/profile-data.png' %}" alt="Propriétaire">
+                <span>Propriétaire</span>
+            </a>
+            <a href="{% url 'IndexApp' %}" class="profile-option">
+                <img src="{% static 'image/customer.png' %}" alt="Client">
+                <span>Client</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

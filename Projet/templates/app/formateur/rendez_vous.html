@@ -1,0 +1,36 @@
+{% extends 'main_app_formateur.html' %}
+{% load static %}
+{% block main_app %}
+
+    <h5 class="mt-2 text-center">Liste des Rendez-vous</h5>
+    <hr>
+    
+    <!-- Tableau pour afficher les rendez-vous -->
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Habitat</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rendez_vous in rendez_vous %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td> <!-- Numérotation -->
+                        <td>{{ rendez_vous.habitat }}</td>
+                        <td>{{ rendez_vous.date }}</td>
+                        <td>{{ rendez_vous.client.user.username }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">Aucun rendez-vous trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock main_app %}
